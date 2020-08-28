@@ -24,11 +24,14 @@ public class PlayerMovement : MonoBehaviour
     private bool isOnArea;     
     
     [Header("Movement Settings")]
-    public float speed = 7f;
-    public float jump = 2f; 
+    public float speed = 4f;
+    public float jump = 6f; 
+    public Animator _anim;
     private Vector3 inputMove; 
     private Vector3 movement; 
     private GameObject mainCamera;
+    private bool isWalking;
+    private bool isRunning;
     
   
 
@@ -37,23 +40,32 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = this.GetComponent<Rigidbody>();
         playerTransform = this.GetComponent<Transform>();        
-        mainCamera = GameObject.Find("Main Camera");       
+        mainCamera = GameObject.Find("Main Camera"); 
+          
     }
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance,groundMask);  
+        if(isGrounded)
+        {
+            _anim.SetBool("Grounded",true);
+        }else
+        {
+           _anim.SetBool("Grounded",false);
+        }
     }
 
     private void FixedUpdate()
     {   
         MovementPlayer();
+        Run();
         OnAreaBall();       
     }
 
     private void OnMovement(InputValue value)
     {   
         var v = value.Get<Vector2>();
-        inputMove = new Vector3(v.x,0,v.y);               
+        inputMove = new Vector3(v.x,0,v.y);                    
     }
 
     private void OnJump(InputValue value)
@@ -62,9 +74,20 @@ public class PlayerMovement : MonoBehaviour
         {
             //_rb.AddForce(new Vector3(0,jump,0), ForceMode.Impulse);
             _rb.AddForce(Vector3.up * _rb.velocity.y, ForceMode.VelocityChange);
-            _rb.AddForce(Vector3.up * jump, ForceMode.VelocityChange);
+            _rb.AddForce(Vector3.up * jump, ForceMode.VelocityChange);            
         }
     }
+    private void OnRun(InputValue value)
+    {  
+        if(value.isPressed)
+        {
+            isRunning = true;
+        }else
+        {
+            isRunning = false;
+        }
+    }      
+       
 
     private void OnShoot()
     {
@@ -82,8 +105,27 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 _relativeMovement = Quaternion.Euler(0,facing,0) * movement;
 
-        _rb.MovePosition(playerTransform.position + _relativeMovement);
-        
+        _rb.MovePosition(playerTransform.position + _relativeMovement);        
+        if(inputMove.x != 0 || inputMove.z != 0)
+        {
+            _anim.SetBool("Walk",true);
+        }else
+        {
+            _anim.SetBool("Walk",false);
+        }
+    }
+
+    void Run()
+    {
+        if(isRunning)
+        {
+            speed = 8f;
+            _anim.SetBool("Run",true);            
+        }else
+        {
+            speed = 4f;
+            _anim.SetBool("Run",false);
+        }
     }
 
     void OnAreaBall()
