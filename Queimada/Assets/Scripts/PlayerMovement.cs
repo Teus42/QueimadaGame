@@ -32,8 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject mainCamera;
     private bool isWalking;
     private bool isRunning;
-    
-  
+     
 
     
     void Start()
@@ -72,7 +71,6 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isGrounded)
         {
-            //_rb.AddForce(new Vector3(0,jump,0), ForceMode.Impulse);
             _rb.AddForce(Vector3.up * _rb.velocity.y, ForceMode.VelocityChange);
             _rb.AddForce(Vector3.up * jump, ForceMode.VelocityChange);            
         }
@@ -119,7 +117,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if(isRunning)
         {
-            speed = 8f;
+            speed = 12f;
             _anim.SetBool("Run",true);            
         }else
         {
