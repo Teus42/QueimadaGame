@@ -35,7 +35,9 @@ public class Bola : MonoBehaviour
             if (ballVelocity > 15)
                 pontuacao += 10;
             pointText.text = $"Pontuação: {pontuacao}";
-            other.gameObject.GetComponent<Renderer>().material.color = Color.red;   
+            other.gameObject.GetComponent<Renderer>().material.color = Color.red;
+            
         }
+        
     }
 }
