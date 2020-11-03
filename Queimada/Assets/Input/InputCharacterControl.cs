@@ -43,6 +43,22 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Mirar"",
+                    ""type"": ""Button"",
+                    ""id"": ""8558329e-998f-41ea-aac3-a4f7fc6ab6f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""OffMirar"",
+                    ""type"": ""Button"",
+                    ""id"": ""66205e56-d48e-4888-a873-9381649e9ecb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""e79a1809-981a-4bed-9bd5-f76124de1b7c"",
@@ -287,6 +303,50 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                     ""action"": ""Run"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9225e2c-545c-465f-9448-b3ab106d9dce"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""keyboard and mouse"",
+                    ""action"": ""Mirar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3979ef06-6e79-4f06-8ef9-0adf6ca9fce1"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Mirar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0edc81cd-83bd-4ffa-b557-5071cf9eb127"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""keyboard and mouse"",
+                    ""action"": ""OffMirar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5fc5a55d-773e-4939-9767-70af565b84f3"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""OffMirar"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -326,6 +386,8 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
+        m_Player_Mirar = m_Player.FindAction("Mirar", throwIfNotFound: true);
+        m_Player_OffMirar = m_Player.FindAction("OffMirar", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
@@ -381,6 +443,8 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Shoot;
+    private readonly InputAction m_Player_Mirar;
+    private readonly InputAction m_Player_OffMirar;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Run;
@@ -391,6 +455,8 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
+        public InputAction @Mirar => m_Wrapper.m_Player_Mirar;
+        public InputAction @OffMirar => m_Wrapper.m_Player_OffMirar;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Run => m_Wrapper.m_Player_Run;
@@ -412,6 +478,12 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
+                @Mirar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMirar;
+                @Mirar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMirar;
+                @Mirar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMirar;
+                @OffMirar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOffMirar;
+                @OffMirar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOffMirar;
+                @OffMirar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOffMirar;
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
@@ -434,6 +506,12 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
+                @Mirar.started += instance.OnMirar;
+                @Mirar.performed += instance.OnMirar;
+                @Mirar.canceled += instance.OnMirar;
+                @OffMirar.started += instance.OnOffMirar;
+                @OffMirar.performed += instance.OnOffMirar;
+                @OffMirar.canceled += instance.OnOffMirar;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -470,6 +548,8 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
+        void OnMirar(InputAction.CallbackContext context);
+        void OnOffMirar(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);

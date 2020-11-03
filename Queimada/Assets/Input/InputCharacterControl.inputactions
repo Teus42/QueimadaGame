@@ -30,6 +30,22 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Mirar",
+                    "type": "Button",
+                    "id": "8558329e-998f-41ea-aac3-a4f7fc6ab6f3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "OffMirar",
+                    "type": "Button",
+                    "id": "66205e56-d48e-4888-a873-9381649e9ecb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "e79a1809-981a-4bed-9bd5-f76124de1b7c",
@@ -272,6 +288,50 @@
                     "processors": "",
                     "groups": "keyboard and mouse",
                     "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9225e2c-545c-465f-9448-b3ab106d9dce",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "keyboard and mouse",
+                    "action": "Mirar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3979ef06-6e79-4f06-8ef9-0adf6ca9fce1",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Mirar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0edc81cd-83bd-4ffa-b557-5071cf9eb127",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "keyboard and mouse",
+                    "action": "OffMirar",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5fc5a55d-773e-4939-9767-70af565b84f3",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "OffMirar",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

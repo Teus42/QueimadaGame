@@ -24,20 +24,32 @@ public class Bola : MonoBehaviour
         ballVelocity = ((transform.position - _posPrev).magnitude) / Time.deltaTime; 
         _posPrev = transform.position;
 
-        Debug.Log("Velocidade = "+ballVelocity.ToString("0"));
+        //Debug.Log("Velocidade = "+ballVelocity.ToString("0"));
         
     }
 
+    //Boss
+    int bVida = 3;   
+   
     private void OnCollisionEnter(Collision other)
     {
-        if(other.gameObject.tag == "Player")
-        {
-            if (ballVelocity > 15)
-                pontuacao += 10;
-            pointText.text = $"Pontuação: {pontuacao}";
-            other.gameObject.GetComponent<Renderer>().material.color = Color.red;
-            
+        if(other.gameObject.tag == "Enemy")
+        {        
+            pontuacao += 10;
+            pointText.text = $"Pontuação: {pontuacao}";             
+            Destroy(other.gameObject);            
         }
-        
+
+        if(other.gameObject.tag == "Boss")
+        {       
+            bVida--;
+            if(bVida == 0)
+            {
+                Destroy(other.gameObject);  
+                pontuacao += 20;
+                pointText.text = $"Pontuação: {pontuacao}";   
+            }                             
+        }     
     }
 }
+

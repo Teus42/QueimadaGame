@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 inputMove;
     private Vector3 movement;
     private GameObject mainCamera;
+    private GameObject cMira;
     private bool isWalking;
     private bool isRunning;
 
@@ -43,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         _rb = this.GetComponent<Rigidbody>();
         playerTransform = this.GetComponent<Transform>();
         mainCamera = GameObject.Find("Main Camera");
+        cMira = GameObject.Find("Mira Cam");
 
     }
     void Update()
@@ -104,6 +106,19 @@ public class PlayerMovement : MonoBehaviour
     {
         GetComponent<QueimadaBola>().Arremesar();
     }
+
+    private void OnMirar()
+    {        
+        mainCamera.SetActive(false);
+        cMira.SetActive(true);
+    }
+
+    private void OnOffMirar()
+    {
+        mainCamera.SetActive(true);
+        cMira.SetActive(false);
+    }
+
 
     void MovementPlayer()
     {

@@ -57,9 +57,7 @@ public class QueimadaBola : MonoBehaviour
     public void Arremesar()
     {  
 
-        float facing = _ball.transform.eulerAngles.y;
-
-        
+        float facing = _ball.transform.eulerAngles.y;      
 
         //Vector3 _relativeShoot = Quaternion.Euler(0,facing,0);
       
