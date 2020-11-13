@@ -25,9 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement Settings")]
     public bool _onSuperSpeed = false;
-    public float speed = 4f;
+    public float speed = 2.5f;
     public bool _onSuperJump = false;
-    public float jump = 6f;
+    public float jump = 3f;
     public Animator _anim;
     private Vector3 inputMove;
     private Vector3 movement;
@@ -153,17 +153,24 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void Run()
-    {
+    {        
         if (isRunning)
         {
-            speed = 12f;
-            _anim.SetBool("Run", true);
-        }
+            if (inputMove.x != 0 || inputMove.z != 0)
+            {
+                speed = 4.5f;
+                _anim.SetBool("Run", true);
+            } else
+            {
+                _anim.SetBool("Run", false);
+            }          
+        }            
         else
         {
-            speed = 4f;
+            speed = 2.5f;
             _anim.SetBool("Run", false);
-        }
+        }    
+        Debug.Log("Input X: "+inputMove.x+" Input Z: "+inputMove.z);
     }
 
     void OnAreaBall()

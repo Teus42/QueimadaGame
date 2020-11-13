@@ -28,8 +28,8 @@ public class Bola : MonoBehaviour
         
     }
 
-    //Boss
-    int bVida = 3;   
+    
+    int bVida = 3;  //Boss
    
     private void OnCollisionEnter(Collision other)
     {
