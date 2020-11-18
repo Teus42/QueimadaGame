@@ -170,13 +170,13 @@ public class PlayerMovement : MonoBehaviour
             speed = 2.5f;
             _anim.SetBool("Run", false);
         }    
-        Debug.Log("Input X: "+inputMove.x+" Input Z: "+inputMove.z);
+        //Debug.Log("Input X: "+inputMove.x+" Input Z: "+inputMove.z);
     }
 
     void OnAreaBall()
     {
         isOnArea = Physics.CheckSphere(areaCheck.position, areaDistance, playerMask);
-
+        /*
         if (isOnArea)
         {
             Debug.Log("Perto da bola");
@@ -185,6 +185,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Longe da bola");
         }
+        */
     }
 
     // Corrotinas
@@ -195,6 +196,7 @@ public class PlayerMovement : MonoBehaviour
 
         StartCoroutine(SpeedCorroutine());
     }
+    
     public IEnumerator SpeedCorroutine()
     {
         yield return new WaitForSeconds(5.0f);
@@ -205,9 +207,9 @@ public class PlayerMovement : MonoBehaviour
     /* Super Jump  */
     public void OnJump()
     {
-
         StartCoroutine(JumpCorroutine());
     }
+
     public IEnumerator JumpCorroutine()
     {
         yield return new WaitForSeconds(5.0f);

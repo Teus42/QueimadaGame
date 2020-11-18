@@ -7,35 +7,32 @@ using System.Globalization;
 public class Bola : MonoBehaviour
 {
     [Header("Ball Settings")]
-    public float ballVelocity;
-    private Vector3 _posPrev;
     public Text pointText;
-    public double pontuacao;
+    public int pontuacao;
+    private float ballVelocity;
+    private Vector3 _posPrev;
+   
   
-    void Start()
+    void Update()
     {
         pointText.text = $"Pontuação: {pontuacao}";
+        PlayerPrefs.SetInt("pontos", pontuacao);
     }
-
-    // Update is called once per frame
+    
     void FixedUpdate()
-    {
-        
+    {        
         ballVelocity = ((transform.position - _posPrev).magnitude) / Time.deltaTime; 
-        _posPrev = transform.position;
-
-        //Debug.Log("Velocidade = "+ballVelocity.ToString("0"));
-        
+        _posPrev = transform.position;   
     }
 
     
-    int bVida = 3;  //Boss
+    int bVida = 15;  //Boss
    
     private void OnCollisionEnter(Collision other)
     {
         if(other.gameObject.tag == "Enemy")
         {        
-            pontuacao += 10;
+            pontuacao += 100;
             pointText.text = $"Pontuação: {pontuacao}";             
             Destroy(other.gameObject);            
         }
@@ -46,7 +43,7 @@ public class Bola : MonoBehaviour
             if(bVida == 0)
             {
                 Destroy(other.gameObject);  
-                pontuacao += 20;
+                pontuacao += 500;
                 pointText.text = $"Pontuação: {pontuacao}";   
             }                             
         }     

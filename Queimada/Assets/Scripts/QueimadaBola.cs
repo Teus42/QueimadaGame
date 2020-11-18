@@ -67,8 +67,7 @@ public class QueimadaBola : MonoBehaviour
             rbBall.collisionDetectionMode = CollisionDetectionMode.Continuous;
             _ball.transform.parent = null;
             rbBall.AddForce(_ball.transform.forward * forceThrow);
-            ballIn = false;
-            Debug.Log("Bola Arremesada");
+            ballIn = false;           
         }
     }
 }
