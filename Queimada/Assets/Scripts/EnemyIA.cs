@@ -7,6 +7,7 @@ public class EnemyIA : MonoBehaviour
 {   
     [Header("IA Settings")]    
     public int ID_IA = 1;
+
     private GameObject _player;
     private GameObject _castelo;
     private NavMeshAgent _agent; 

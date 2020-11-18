@@ -16,12 +16,12 @@ public class Poderzinho : MonoBehaviour
     {
         PlayerMovement player = other.GetComponent<PlayerMovement>();
 
-        if (id == 1)
+        if (id == 0)
         {
             player._onSuperSpeed = true;
             player.OnSpeed();
         }
-        else if (id == 2)
+        else if (id == 1)
         {
             player._onSuperJump = true;
             player.OnJump();
