@@ -5,7 +5,7 @@ using UnityEngine;
 public class QueimadaBola : MonoBehaviour
 {
     private GameObject _ball;
-    private Rigidbody rbBall;
+    private Rigidbody _rbBall;    
     private GameObject _player;
 
     [Header("Throw Ball Settings")]
@@ -13,15 +13,19 @@ public class QueimadaBola : MonoBehaviour
     
     [SerializeField]
     private bool ballIn = false;
+    
+    
 
 
     private Vector3 onHands;    
     void Start()
     {
+        
         _ball = GameObject.Find("Bola");
         _player = this.gameObject;
-        rbBall = _ball.GetComponent<Rigidbody>();
+        _rbBall = _ball.GetComponent<Rigidbody>();
         onHands = new Vector3(1.5f,0.168f,0.05f);
+        
                 
     }
 
@@ -36,12 +40,10 @@ public class QueimadaBola : MonoBehaviour
     {
         if(ballIn)
         {
-            _ball.transform.localPosition = onHands;
+            _ball.transform.localPosition = onHands;            
             _ball.transform.localRotation = Quaternion.Euler(0,0,0);
-            rbBall.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
-            rbBall.isKinematic = true;
-            
-
+            _rbBall.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
+            _rbBall.isKinematic = true;           
         }    
     }
 
@@ -49,7 +51,7 @@ public class QueimadaBola : MonoBehaviour
     {
         if(other.gameObject == _ball)
         {
-            _ball.transform.parent = _player.gameObject.transform;
+            _ball.transform.parent = _player.gameObject.transform;            
             ballIn = true;
         } 
     }
@@ -60,14 +62,23 @@ public class QueimadaBola : MonoBehaviour
         float facing = _ball.transform.eulerAngles.y;      
 
         //Vector3 _relativeShoot = Quaternion.Euler(0,facing,0);
-      
+
         if(ballIn)
-        {                
-            rbBall.isKinematic = false;
-            rbBall.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        {                           
+            _rbBall.isKinematic = false;
+            _rbBall.collisionDetectionMode = CollisionDetectionMode.Continuous;
             _ball.transform.parent = null;
-            rbBall.AddForce(_ball.transform.forward * forceThrow);
+            _rbBall.AddForce(_ball.transform.forward * forceThrow);
             ballIn = false;           
         }
     }
+
+    public void BuscarBola()
+    {
+        if(ballIn == false)
+        {
+            _ball.transform.parent = _player.gameObject.transform;            
+            ballIn = true;
+        }
+    }   
 }

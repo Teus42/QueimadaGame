@@ -8,45 +8,36 @@ public class Bola : MonoBehaviour
 {
     [Header("Ball Settings")]
     public Text pointText;
-    public int pontuacao;
+    private string _showDificuldade;    
+    private int _buscaPontos;
     private float ballVelocity;
-    private Vector3 _posPrev;
+    private Vector3 _posPrev; 
+    private int _tempPontos;  
    
-  
     void Update()
     {
-        pointText.text = $"Pontuação: {pontuacao}";
-        PlayerPrefs.SetInt("pontos", pontuacao);
+        _buscaPontos = PlayerPrefs.GetInt("buscaPontos");
+        
+        pointText.text = "Pontuação: "+_buscaPontos.ToString();
+        _tempPontos = PlayerPrefs.GetInt("pontos");         
+       
+        if(Castelo._gameOver == true)
+        {
+            PlayerPrefs.SetInt("pontos", _tempPontos + _buscaPontos);  
+            PlayerPrefs.SetInt("buscaPontos", 0);  
+        }
+
+        Debug.Log("Pontos: "+ PlayerPrefs.GetInt("pontos"));
+        Debug.Log("Busca Pontos: "+ PlayerPrefs.GetInt("buscaPontos"));
+        Debug.Log("Temp Pontos: "+ _tempPontos);
+
     }
     
     void FixedUpdate()
     {        
         ballVelocity = ((transform.position - _posPrev).magnitude) / Time.deltaTime; 
         _posPrev = transform.position;   
-    }
-
-    
-    int bVida = 15;  //Boss
+    }     
    
-    private void OnCollisionEnter(Collision other)
-    {
-        if(other.gameObject.tag == "Enemy")
-        {        
-            pontuacao += 100;
-            pointText.text = $"Pontuação: {pontuacao}";             
-            Destroy(other.gameObject);            
-        }
-
-        if(other.gameObject.tag == "Boss")
-        {       
-            bVida--;
-            if(bVida == 0)
-            {
-                Destroy(other.gameObject);  
-                pontuacao += 500;
-                pointText.text = $"Pontuação: {pontuacao}";   
-            }                             
-        }     
-    }
 }
 

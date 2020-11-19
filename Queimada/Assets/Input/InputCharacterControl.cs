@@ -35,6 +35,14 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""3d973d5d-cec9-4fd0-99ef-ec8e0c6b59ad"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Shoot"",
                     ""type"": ""Button"",
                     ""id"": ""6658fe6a-39f6-4aa2-bd32-7c48f721accc"",
@@ -43,17 +51,9 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Mirar"",
+                    ""name"": ""Bola"",
                     ""type"": ""Button"",
                     ""id"": ""8558329e-998f-41ea-aac3-a4f7fc6ab6f3"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""OffMirar"",
-                    ""type"": ""Button"",
-                    ""id"": ""66205e56-d48e-4888-a873-9381649e9ecb"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -311,7 +311,7 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""keyboard and mouse"",
-                    ""action"": ""Mirar"",
+                    ""action"": ""Bola"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -322,29 +322,29 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""Mirar"",
+                    ""action"": ""Bola"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""0edc81cd-83bd-4ffa-b557-5071cf9eb127"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""id"": ""9ed4d546-e4af-449d-8cd4-2eaf02cafa88"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""keyboard and mouse"",
-                    ""action"": ""OffMirar"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""5fc5a55d-773e-4939-9767-70af565b84f3"",
-                    ""path"": ""<Gamepad>/leftTrigger"",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""id"": ""9ad57828-25fa-4d8d-992f-b76037d761e3"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": ""Gamepad"",
-                    ""action"": ""OffMirar"",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -385,9 +385,9 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
-        m_Player_Mirar = m_Player.FindAction("Mirar", throwIfNotFound: true);
-        m_Player_OffMirar = m_Player.FindAction("OffMirar", throwIfNotFound: true);
+        m_Player_Bola = m_Player.FindAction("Bola", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
@@ -442,9 +442,9 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Shoot;
-    private readonly InputAction m_Player_Mirar;
-    private readonly InputAction m_Player_OffMirar;
+    private readonly InputAction m_Player_Bola;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Look;
     private readonly InputAction m_Player_Run;
@@ -454,9 +454,9 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
         public PlayerActions(@InputCharacterControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
-        public InputAction @Mirar => m_Wrapper.m_Player_Mirar;
-        public InputAction @OffMirar => m_Wrapper.m_Player_OffMirar;
+        public InputAction @Bola => m_Wrapper.m_Player_Bola;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Look => m_Wrapper.m_Player_Look;
         public InputAction @Run => m_Wrapper.m_Player_Run;
@@ -475,15 +475,15 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                 @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Pause.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPause;
                 @Shoot.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
                 @Shoot.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShoot;
-                @Mirar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMirar;
-                @Mirar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMirar;
-                @Mirar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMirar;
-                @OffMirar.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOffMirar;
-                @OffMirar.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOffMirar;
-                @OffMirar.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnOffMirar;
+                @Bola.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBola;
+                @Bola.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBola;
+                @Bola.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnBola;
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
@@ -503,15 +503,15 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
                 @Shoot.started += instance.OnShoot;
                 @Shoot.performed += instance.OnShoot;
                 @Shoot.canceled += instance.OnShoot;
-                @Mirar.started += instance.OnMirar;
-                @Mirar.performed += instance.OnMirar;
-                @Mirar.canceled += instance.OnMirar;
-                @OffMirar.started += instance.OnOffMirar;
-                @OffMirar.performed += instance.OnOffMirar;
-                @OffMirar.canceled += instance.OnOffMirar;
+                @Bola.started += instance.OnBola;
+                @Bola.performed += instance.OnBola;
+                @Bola.canceled += instance.OnBola;
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
@@ -547,9 +547,9 @@ public class @InputCharacterControl : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
-        void OnMirar(InputAction.CallbackContext context);
-        void OnOffMirar(InputAction.CallbackContext context);
+        void OnBola(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnLook(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);

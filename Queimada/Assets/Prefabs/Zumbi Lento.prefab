@@ -33,6 +33,7 @@ GameObject:
   - component: {fileID: 7748828143403360148}
   - component: {fileID: 4273484858236431839}
   - component: {fileID: 790952449461325478}
+  - component: {fileID: -8345408968820328658}
   m_Layer: 0
   m_Name: Zumbi Lento
   m_TagString: Enemy
@@ -153,6 +154,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID_IA: 1
+--- !u!114 &-8345408968820328658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7748828143403360149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abbe17df4e1ec584180d45e8e20c674b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3830516961159873655
 PrefabInstance:
   m_ObjectHideFlags: 0

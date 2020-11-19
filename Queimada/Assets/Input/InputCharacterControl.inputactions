@@ -22,6 +22,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "3d973d5d-cec9-4fd0-99ef-ec8e0c6b59ad",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Shoot",
                     "type": "Button",
                     "id": "6658fe6a-39f6-4aa2-bd32-7c48f721accc",
@@ -30,17 +38,9 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Mirar",
+                    "name": "Bola",
                     "type": "Button",
                     "id": "8558329e-998f-41ea-aac3-a4f7fc6ab6f3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "OffMirar",
-                    "type": "Button",
-                    "id": "66205e56-d48e-4888-a873-9381649e9ecb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -298,7 +298,7 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "keyboard and mouse",
-                    "action": "Mirar",
+                    "action": "Bola",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -309,29 +309,29 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Mirar",
+                    "action": "Bola",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "0edc81cd-83bd-4ffa-b557-5071cf9eb127",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "Press(behavior=1)",
+                    "id": "9ed4d546-e4af-449d-8cd4-2eaf02cafa88",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "keyboard and mouse",
-                    "action": "OffMirar",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "5fc5a55d-773e-4939-9767-70af565b84f3",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "Press(behavior=1)",
+                    "id": "9ad57828-25fa-4d8d-992f-b76037d761e3",
+                    "path": "<Gamepad>/start",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "OffMirar",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

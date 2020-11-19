@@ -8,8 +8,13 @@ public class Castelo : MonoBehaviour
     [Header("Castelo Settings")]
     public Text vida;
     public GameObject gameOver;
-    private int _casteloVida = 100;
+    private int _casteloVida;
+    public static bool _gameOver;
 
+    void Start() 
+    {
+        _casteloVida = PlayerPrefs.GetInt("cVida");
+    }
 
     void Update()
     {
@@ -18,8 +23,9 @@ public class Castelo : MonoBehaviour
 
         if(_casteloVida <= 0)
         {
-            gameOver.SetActive(true);
-            Cursor.lockState = CursorLockMode.None;
+            _gameOver = true;
+            gameOver.SetActive(true);            
+            Cursor.lockState = CursorLockMode.None;            
             Time.timeScale = 0;
             Destroy(this.gameObject);
         }

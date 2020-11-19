@@ -25,9 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement Settings")]
     public bool _onSuperSpeed = false;
-    public float speed = 2.5f;
+    public float speed = 2.8f;
     public bool _onSuperJump = false;
-    public float jump = 3f;
+    public float jump = 1.5f;
     public Animator _anim;
     private Vector3 inputMove;
     private Vector3 movement;
@@ -35,6 +35,10 @@ public class PlayerMovement : MonoBehaviour
     private GameObject cMira;
     private bool isWalking;
     private bool isRunning;
+
+    [Header("Pause Settings")]
+    public GameObject GameController;
+
 
 
 
@@ -50,14 +54,15 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-        if (isGrounded)
+        if (!isGrounded)
         {
-            _anim.SetBool("Grounded", true);
+            _anim.SetBool("Jump", true);
         }
         else
         {
-            _anim.SetBool("Grounded", false);
+            _anim.SetBool("Jump", false);
         }
+        
     }
 
     private void FixedUpdate()
@@ -101,25 +106,14 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-
     private void OnShoot()
     {
         GetComponent<QueimadaBola>().Arremesar();
-    }
-
-    private void OnMirar()
+    }  
+    private void OnBola()
     {        
-        mainCamera.SetActive(false);
-        cMira.SetActive(true);
-    }
-
-    private void OnOffMirar()
-    {
-        mainCamera.SetActive(true);
-        cMira.SetActive(false);
-    }
-
-
+        GetComponent<QueimadaBola>().BuscarBola();
+    }   
     void MovementPlayer()
     {
         movement = new Vector3(inputMove.x, 0f, inputMove.z);
@@ -186,6 +180,11 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("Longe da bola");
         }
         */
+    }
+
+    private void OnPause()
+    {
+        GameController.GetComponent<Menu>().Pausar();
     }
 
     // Corrotinas

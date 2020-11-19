@@ -40,7 +40,7 @@ public class SpawnManager : MonoBehaviour
 		{
 			int list = Random.Range(0, powerUp.Length);
 			Instantiate(powerUp[list], new Vector3(Random.Range(1.24f, 5f), 1.52f, -7.65f), Quaternion.identity);
-		yield return new WaitForSeconds(5f);
+			yield return new WaitForSeconds(5f);
 		}
 	}
 	IEnumerator BossSpawn()

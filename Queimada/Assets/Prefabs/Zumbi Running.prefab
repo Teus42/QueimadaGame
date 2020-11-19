@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1437112674732873784}
   - component: {fileID: 4843216431308876403}
   - component: {fileID: 8251438353173399818}
+  - component: {fileID: -8164202181547370418}
   m_Layer: 0
   m_Name: Zumbi Running
   m_TagString: Enemy
@@ -134,6 +135,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ID_IA: 1
+--- !u!114 &-8164202181547370418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437112674732873785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abbe17df4e1ec584180d45e8e20c674b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &8315892843590942309
 Animator:
   serializedVersion: 3
