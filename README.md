@@ -1,8 +1,8 @@
-## Queimada Game
+## Dodge Castle
 
 ### Conceitos
 
-Um jogo de queimada
+Um jogo de zumbis com queimada
 
 ### Requisitos
 
