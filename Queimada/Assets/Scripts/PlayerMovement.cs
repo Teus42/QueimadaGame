@@ -105,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
             else if (_onSuperJump == true)
             {
                 _rb.AddForce(Vector3.up * _rb.velocity.y, ForceMode.VelocityChange);
-                _rb.AddForce(Vector3.up * jump * 30, ForceMode.VelocityChange);
+                _rb.AddForce(Vector3.up * jump * 2.5f, ForceMode.VelocityChange);
             }
         }
     }
@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (_onSuperSpeed == true)
         {
-            movement = movement * speed * 2 * Time.deltaTime;
+            movement = movement * speed * 2.5f * Time.deltaTime;
         }
 
 

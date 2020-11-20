@@ -26,7 +26,7 @@ public class SpawnManager : MonoBehaviour
      	while (true)
 		{
 			int list = Random.Range(0, enemy.Length);
-			Instantiate(enemy[list], new Vector3(Random.Range(-8.14f, 18.5f), 1f, -15f), Quaternion.identity);
+			Instantiate(enemy[list], new Vector3(Random.Range(-5.3f, 10.96f), 1f, 14.44f), Quaternion.identity);
 			yield return new WaitForSeconds(2.5f);
 		}
 
@@ -39,8 +39,8 @@ public class SpawnManager : MonoBehaviour
 		while (true) 
 		{
 			int list = Random.Range(0, powerUp.Length);
-			Instantiate(powerUp[list], new Vector3(Random.Range(1.24f, 5f), 1.52f, -7.65f), Quaternion.identity);
-			yield return new WaitForSeconds(5f);
+			Instantiate(powerUp[list], new Vector3(Random.Range(-5.07f, 17.99f), 1.52f, Random.Range(-31.51f, 13.56f)), Quaternion.identity);
+			yield return new WaitForSeconds(10f);
 		}
 	}
 	IEnumerator BossSpawn()
@@ -49,7 +49,7 @@ public class SpawnManager : MonoBehaviour
 		while (true)
 		{
 			yield return new WaitForSeconds(120f);
-			Instantiate(boss, new Vector3(Random.Range(1.24f, 5f), 1.52f, -7.65f), Quaternion.identity);
+			Instantiate(boss, new Vector3(Random.Range(-5.3f, 10.96f), 1f, 14.44f), Quaternion.identity);
 		}
 	}
 }
