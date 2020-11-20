@@ -66,9 +66,5 @@ public class AudioManager : MonoBehaviour
             s.source.mute = false;                   
         }
                
-    }
-
-   
-
-
+    } 
 }

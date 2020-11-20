@@ -12,6 +12,9 @@ public class Menu : MonoBehaviour
     void Start()
     {
         PlayerPrefs.SetInt("buscaPontos", 0);
+
+        //Arrumar SOM
+        FindObjectOfType<AudioManager>().Play("Thriller");
     }
     public void Iniciar()
     {

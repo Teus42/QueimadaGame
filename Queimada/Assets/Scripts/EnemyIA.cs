@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyIA : MonoBehaviour
 {   
     [Header("IA Settings")]    
-    private int ID_IA = 1;
+    public int ID_IA;
     private GameObject _player;
     private GameObject _castelo;
     private NavMeshAgent _agent; 
@@ -21,7 +21,7 @@ public class EnemyIA : MonoBehaviour
     void Update()
     {
         
-
+        _castelo = GameObject.FindGameObjectWithTag("Cast");
         if(ID_IA == 1)
         {
             Perseguir(); 

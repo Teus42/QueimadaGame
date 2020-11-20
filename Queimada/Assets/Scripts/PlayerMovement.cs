@@ -10,6 +10,10 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
+
+    public GameObject skinMain;
+    public GameObject skin2;
+    public GameObject skin3;
     private Rigidbody _rb;
     private Transform playerTransform;
     private bool isGrounded;
@@ -29,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     public bool _onSuperJump = false;
     public float jump = 1.5f;
     public Animator _anim;
+    public Animator _anim2;
+    public Animator _anim3;
     private Vector3 inputMove;
     private Vector3 movement;
     private GameObject mainCamera;
@@ -49,18 +55,27 @@ public class PlayerMovement : MonoBehaviour
         playerTransform = this.GetComponent<Transform>();
         mainCamera = GameObject.Find("Main Camera");
         cMira = GameObject.Find("Mira Cam");
+        
+
+        //Arrumar Som
+        FindObjectOfType<AudioManager>().Play("Passos");    
 
     }
     void Update()
     {
+        SelecionarSkin();
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (!isGrounded)
         {
             _anim.SetBool("Jump", true);
+            _anim2.SetBool("Jump", true);
+            _anim3.SetBool("Jump", true);
         }
         else
         {
             _anim.SetBool("Jump", false);
+            _anim2.SetBool("Jump", false);
+            _anim3.SetBool("Jump", false);
         }
         
     }
@@ -139,10 +154,14 @@ public class PlayerMovement : MonoBehaviour
         if (inputMove.x != 0 || inputMove.z != 0)
         {
             _anim.SetBool("Walk", true);
+            _anim2.SetBool("Walk", true);
+            _anim3.SetBool("Walk", true);
         }
         else
         {
             _anim.SetBool("Walk", false);
+            _anim2.SetBool("Walk", false);
+            _anim3.SetBool("Walk", false);
         }
     }
 
@@ -154,15 +173,21 @@ public class PlayerMovement : MonoBehaviour
             {
                 speed = 4.5f;
                 _anim.SetBool("Run", true);
+                _anim2.SetBool("Run", true);
+                _anim3.SetBool("Run", true);
             } else
             {
                 _anim.SetBool("Run", false);
+                _anim2.SetBool("Run", false);
+                _anim3.SetBool("Run", false);
             }          
         }            
         else
         {
             speed = 2.5f;
             _anim.SetBool("Run", false);
+            _anim2.SetBool("Run", false);
+            _anim3.SetBool("Run", false);
         }    
         //Debug.Log("Input X: "+inputMove.x+" Input Z: "+inputMove.z);
     }
@@ -186,6 +211,30 @@ public class PlayerMovement : MonoBehaviour
     {
         GameController.GetComponent<Menu>().Pausar();
     }
+
+    public void SelecionarSkin()
+    {
+        if(PlayerPrefs.GetInt("skin") == 1)
+        {
+            skinMain.SetActive(true);
+            skin2.SetActive(false);
+            skin3.SetActive(false);
+        }
+        if(PlayerPrefs.GetInt("skin") == 2)
+        {
+            skin2.SetActive(true);
+            skin3.SetActive(false);
+            skinMain.SetActive(false);
+        }
+        if(PlayerPrefs.GetInt("skin") == 3)
+        {
+            skin3.SetActive(true);
+            skin2.SetActive(false);
+            skinMain.SetActive(false);
+        }
+    }
+
+
 
     // Corrotinas
 
