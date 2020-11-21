@@ -35,9 +35,10 @@ public class Zumbi : MonoBehaviour
                 bVida--;
                 if(bVida == 0)
                 {
-                    Destroy(this.gameObject);  
-                    pontuacao += 500;                    
-                    PlayerPrefs.SetInt("buscaPontos", _buscaPontos + pontuacao);       
+                    pontuacao += 500; 
+                    _buscaPontos = PlayerPrefs.GetInt("buscaPontos");                    
+                    PlayerPrefs.SetInt("buscaPontos", _buscaPontos + pontuacao);
+                    Destroy(this.gameObject);           
                 }                             
             }
         }
