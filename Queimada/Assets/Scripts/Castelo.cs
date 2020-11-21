@@ -18,16 +18,14 @@ public class Castelo : MonoBehaviour
 
     void Update()
     {
+        Overgame();
         Debug.Log("Vida do Castelo = "+_casteloVida);
-        vida.text = "Vida do Castelo = "+_casteloVida.ToString(); 
+
+        vida.text = "Vida  do  Castelo   "+_casteloVida.ToString(); 
 
         if(_casteloVida <= 0)
         {
-            _gameOver = true;
-            gameOver.SetActive(true);            
-            Cursor.lockState = CursorLockMode.None;            
-            Time.timeScale = 0;
-            Destroy(this.gameObject);
+            _gameOver = true;            
         }
 
     }
@@ -45,5 +43,16 @@ public class Castelo : MonoBehaviour
             _casteloVida = _casteloVida - 50;
             Destroy(other.gameObject);            
         }   
+    }
+
+    public void Overgame()
+    {
+        if(_gameOver == true)
+        {
+            gameOver.SetActive(true);            
+            Cursor.lockState = CursorLockMode.None;            
+            Time.timeScale = 0;
+            Destroy(this.gameObject);
+        }
     }
 }

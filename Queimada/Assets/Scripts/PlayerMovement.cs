@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Character Settings")]
     //public CharacterController controller;    
+    public Text vida;
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
@@ -17,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
     private Transform playerTransform;
     private bool isGrounded;
-    private Vector3 velocity;
+    private Vector3 velocity;    
+    private int _vida;
 
     [Header("Ball Area Settings")]
     public Transform areaCheck;
@@ -54,15 +57,27 @@ public class PlayerMovement : MonoBehaviour
         _rb = this.GetComponent<Rigidbody>();
         playerTransform = this.GetComponent<Transform>();
         mainCamera = GameObject.Find("Main Camera");
-        cMira = GameObject.Find("Mira Cam");
-        
-
+        cMira = GameObject.Find("Mira Cam");      
         //Arrumar Som
-        FindObjectOfType<AudioManager>().Play("Passos");    
-
+        FindObjectOfType<AudioManager>().Play("Passos");  
+        
+        if(PlayerPrefs.GetString("Dificuldade") == "Normal")
+        {
+            _vida = 3;
+        }
+        if(PlayerPrefs.GetString("Dificuldade") == "Dificil")
+        {
+            _vida = 2;
+        }
+        if(PlayerPrefs.GetString("Dificuldade") == "Rudolph")
+        {
+            _vida = 1;
+        }
     }
+
     void Update()
     {
+        vida.text = "Vida = "+_vida.ToString();
         SelecionarSkin();
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         if (!isGrounded)
@@ -78,6 +93,7 @@ public class PlayerMovement : MonoBehaviour
             _anim3.SetBool("Jump", false);
         }
         
+        Debug.Log("Vida = "+_vida);
     }
 
     private void FixedUpdate()
@@ -87,6 +103,17 @@ public class PlayerMovement : MonoBehaviour
         OnAreaBall();
     }
 
+    private void OnCollisionEnter(Collision other) 
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            _vida--;
+            if(_vida <= 0)
+            {
+                Castelo._gameOver = true;
+            }
+        }
+    }
     private void OnMovement(InputValue value)
     {
         var v = value.Get<Vector2>();
@@ -263,6 +290,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(5.0f);
         _onSuperJump = false;
     }
-
 }
+
+
 

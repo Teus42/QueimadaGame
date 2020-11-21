@@ -18,7 +18,7 @@ public class Bola : MonoBehaviour
     {
         _buscaPontos = PlayerPrefs.GetInt("buscaPontos");
         
-        pointText.text = "Pontuação: "+_buscaPontos.ToString();
+        pointText.text = "Pontos   "+_buscaPontos.ToString();
         _tempPontos = PlayerPrefs.GetInt("pontos");         
        
         if(Castelo._gameOver == true)

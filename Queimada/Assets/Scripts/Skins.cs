@@ -20,7 +20,7 @@ public class Skins : MonoBehaviour
     void Update()
     {        
         pontos = PlayerPrefs.GetInt("pontos");
-        skins.text = "Pontos: " + pontos.ToString();
+        skins.text = "Pontos   " + pontos.ToString();
 
         if(PlayerPrefs.GetInt("skin") == 1)
         {
@@ -115,12 +115,12 @@ public class Skins : MonoBehaviour
     {
         if(_temp1)
         {
-            _desbloqueio.text = "Deseja desbloquear o Alvins por "+priceAlvins+" pontos";
+            _desbloqueio.text = "Deseja     desbloquear    o    Alvins    por    "+priceAlvins+"    pontos";
             _pnl_skins.SetActive(true);
         }
         if(_temp2)
         {
-            _desbloqueio.text = "Deseja desbloquear a Gertudres por "+priceGer+" pontos";
+            _desbloqueio.text = "Deseja    desbloquear    a    Gertudres    por   "+priceGer+"    pontos";
             _pnl_skins.SetActive(true);
         }
         

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     public GameObject pnl_dificuldade;
+    public GameObject pnl_temp;
     public GameObject pnl_pause;
     public GameObject zumbi;
 
@@ -46,6 +47,17 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene("Jogo");
     }
 
+    //Dificuldade Rudolph ainda em desenvolvimento
+    public void Rudolph()
+    {
+        Time.timeScale = 1;
+        PlayerPrefs.SetInt("zVida",10);
+        PlayerPrefs.SetInt("bVida",50);        
+        PlayerPrefs.SetInt("cVida",10);   
+        PlayerPrefs.SetString("Dificuldade", "Rudolph");    
+        SceneManager.LoadScene("Jogo");
+    }
+
     public void Skins()
     {
         Time.timeScale = 1;
@@ -83,5 +95,16 @@ public class Menu : MonoBehaviour
         pnl_pause.SetActive(false);   
         Time.timeScale = 1;       
         Cursor.lockState = CursorLockMode.Locked;     
-    }     
+    }   
+
+    public void RudolphDesenvolvimento()
+    {
+        pnl_dificuldade.SetActive(false);
+        pnl_temp.SetActive(true);
+    }  
+    public void fecharRudolphDesenvolvimento()
+    {
+        pnl_dificuldade.SetActive(true);
+        pnl_temp.SetActive(false);
+    }  
 }
